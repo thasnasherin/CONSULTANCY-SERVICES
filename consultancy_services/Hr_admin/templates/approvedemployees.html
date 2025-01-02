@@ -1,0 +1,39 @@
+{% extends 'admin_ui.html' %}
+{% block content %}
+<div class="col-lg-6 grid-margin stretch-card" style="display: inline;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Category</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th>Designation</th>
+                    <th>Qualification</th>
+                    <th>Employee Image</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                  <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.design}}</td>
+                    <td>{{i.qual}}</td>
+                    {% if i.img %}
+                    <td><img src="{{i.img.url}}"></td>                    {% endif %}  
+                  </tr>
+            {% endfor %} 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

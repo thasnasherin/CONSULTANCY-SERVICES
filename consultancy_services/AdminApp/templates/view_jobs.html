@@ -1,0 +1,43 @@
+{% extends 'admin_ui.html' %}
+{% block content %}
+<div class="col-lg-6 grid-margin stretch-card" style="display: inline;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Category</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Vacancy</th>
+                <th>Skill</th>
+                <th>Location</th>
+                <th>Experience</th>
+                <th>Salary</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in details %}
+              <tr>
+                <td>{{i.name}}</td>
+                <td><img src="{{i.image.url}}" height="70px" width="auto"></td>
+                <td>{{i.vacancy}}</td>
+                <td>{{i.skill}}</td>
+                <td>{{i.location}}</td>
+                <td>{{i.exp}}</td>
+                <td>{{i.sal}}</td>
+                <td><a href="{% url 'edit_job' i.id %}"><button type="submit" class="btn btn-outline-info btn-fw">Edit</button></a></td>
+                <td><a href="{% url 'delete' i.id %}"><button type="submit" class="btn btn-outline-info btn-fw">Delete</button></a></td>
+              </tr>
+            {% endfor %} 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

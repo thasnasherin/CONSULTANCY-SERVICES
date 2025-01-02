@@ -1,0 +1,21 @@
+{% extends 'empindex.html' %}
+{% block content %}
+<center><p style="color: red;">{{msg}}</p></center>
+<form action="{% url 'emplogdata' %}" class="mb-4" method="post">
+    {% csrf_token %}
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <input type="text" class="w-100 form-control border-0 py-3" name="username" placeholder="Your Name">
+        </div>
+        <div class="col-lg-6">
+            <input type="password" class="w-100 form-control border-0 py-3" name="password" placeholder="Enter Your Password">
+        </div>
+        <br><br><br>
+        <div class="col-12">
+            <button class="w-100 btn btn-primary form-control py-2" type="submit">Login</button>
+        </div>
+      
+    </div>
+</form>
+
+{% endblock %}

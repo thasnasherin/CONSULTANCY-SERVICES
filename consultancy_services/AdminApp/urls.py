@@ -1,0 +1,36 @@
+from django.urls import path
+from AdminApp import views
+
+urlpatterns = [
+   path('admin_ui',views.admin_ui,name="admin_ui"),
+   path('add_jobs',views.add_jobs,name="add_jobs"),
+   path('jobdata',views.jobdata,name="jobdata"),
+   path('view_jobs',views.view_jobs,name="view_jobs"),
+   path('edit_job/<int:id>',views.edit_job,name="edit_job"),
+   path('update/<int:id>',views.update,name="update"),
+   path('delete/<int:id>',views.delete,name="delete"),
+   # path('service_input',views.service_input,name="service_input"),
+   # path('database',views.database,name="database"),
+   # path('view_service',views.view_service,name="view_service"),
+   # path('edit_service/<int:id>',views.edit_service,name="edit_service"),
+   # path('updating/<int:id>',views.updating,name="updating"),
+   # path('deleting/<int:id>',views.deleting,name="deleting"),
+   path('feedback',views.feedback,name="feedback"),
+   path('registered_users',views.registered_users,name="registered_users"),
+   path('viewjobrequests',views.viewjobrequests,name="viewjobrequests"),
+   path('approve/<int:id>/',views.approve,name="approve"),
+   path('declain/<int:id>/',views.declain,name="declain"),
+   path('approvedrequests',views.approvedrequests,name="approvedrequests"),
+   path('declainrequests',views.declainrequests,name="declainrequests"),
+   path('emprequests',views.emprequests,name="emprequests"),
+   path('approve1/<int:id>/',views.approve1,name="approve1"),
+   path('declain1/<int:id>/',views.declain1,name="declain1"),
+   path('approvedemp',views.approvedemp,name="approvedemp"),
+   path('declainedemp',views.declainedemp,name="declainedemp"),
+   path('reqthroughemp',views.reqthroughemp,name="reqthroughemp"),
+   path('approve2/<int:id>/',views.approve2,name="approve2"),
+   path('declain2/<int:id>/',views.declain2,name="declain2"),
+   path('apprreqemp',views.apprreqemp,name="apprreqemp"),
+   path('declempreq',views.declempreq,name="declempreq"),
+
+]

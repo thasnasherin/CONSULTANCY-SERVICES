@@ -1,0 +1,51 @@
+{% extends 'empindex.html' %}
+{% block content %}
+<div class="col-lg-6 grid-margin stretch-card" style="display: inline;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Category</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Job</th>
+                <th>Resume</th>
+                <th>Response</th>
+                
+               
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in data %}
+              <tr>
+                <td>{{i.uid.username}}</td>
+                <td>{{i.uid.number}}</td>
+                <td>{{i.uid.email}}</td>
+                <td>{{i.job}}</td>
+               
+
+            
+                <td><a href="{{i.resume.url}}"><button class="btn btn-primary">VIEW RESUME</button></a>
+                </td>
+                {% if i.status == 0 %}
+                <td><p style="color: yellow;">Waiting For Response</p></td>
+                {% elif i.status == 1 %}
+                <td><p style="color: rgb(42, 122, 95);">Shortlisted</p></td>
+                {% elif i.status == 2 %}
+                <td><p style="color: red;">rejected</p></td>
+                {% endif %}
+
+
+              </tr>
+            {% endfor %} 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

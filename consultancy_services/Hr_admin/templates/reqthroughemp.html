@@ -1,0 +1,50 @@
+{% extends 'admin_ui.html' %}
+{% block content %}
+<div class="col-lg-6 grid-margin stretch-card" style="display: inline;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Category</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Reffered Employee's Contact Num</th>
+                <th>Reffered Employee's Email</th>
+                <th>Reffered Employee</th>
+                <th>Job</th>
+                <th>Resume</th>
+                <th>Cover Letter</th>
+                <th>Approve</th>
+                <th>Reject</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in data %}
+              <tr>
+                <td>{{i.uid.username}}</td>
+                <td>{{i.uid.number}}</td>
+                <td>{{i.uid.email}}</td>
+                <td>{{i.eid.name}}</td>
+                <td>{{i.eid.phone}}</td>
+                <td>{{i.eid.email}}</td>
+                <td>{{i.job}}</td>
+                <td><a href="{{i.resume.url}}"><button class="btn btn-primary">VIEW RESUME</button></a>
+                </td>
+                <td>{{i.coverletter}}</td>
+
+
+                <td><a href="{% url 'approve2' i.id %}"><button type="submit" class="btn btn-outline-info btn-fw">APPROVE</button></a></td>
+                <td><a href="{% url 'declain2' i.id %}"><button type="submit" class="btn btn-outline-info btn-fw">REJECT</button></a></td>
+              </tr>
+            {% endfor %} 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

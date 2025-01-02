@@ -1,0 +1,68 @@
+{% extends 'home_page.html' %}
+{% block content %}
+<center><div class="untree_co-section">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            
+            
+            {% for i in data %}
+            <div class="col-lg-12">
+                {% if i.status == 0 %}
+                <b><h2 class="section-title text-left mb-4" style="color: rgb(250, 214, 9);">YOUR APPLICATION IS ON PROCESSING...</h2></b>
+                <p>Pls wait some time...Your application is checking...Best of luck...</p>
+
+                <p class="mb-4">Check Your Status Below!!</p>
+
+                <ul class="list-unstyled">
+                    <li>NAME:{{i.uid.username}}</li>
+                    <li>JOB:{{i.jid.name}}</li>
+                    <li>JOB:{{i.jid.location}}</li>
+                    <li>JOB:{{i.jid.skills}}</li>
+                    <li>JOB:{{i.jid.exp}}</li>
+                    <li>JOB:{{i.jid.sal}}</li>
+                </ul>
+
+                <p><a href="{% url 'home_page' %}" class="btn btn-primary">Back to Home</a></p>
+                
+                {% elif i.status == 1 %}
+                <b><h2 class="section-title text-left mb-4" style="color:rgb(10, 240, 163);">CONGRATULATIONS...YOU ARE SHORTLISTED TO THIS DESIGNATION!!</h2></b>
+                <p>Further Details will inform You Soon...</p>
+
+                <p class="mb-4">Check Your Status Below!!</p>
+
+                <ul class="list-unstyled">
+                    <li>NAME:{{i.uid.username}}</li>
+                    <li>JOB:{{i.jid.name}}</li>
+                    <li>JOB:{{i.jid.location}}</li>
+                    <li>JOB:{{i.jid.skills}}</li>
+                    <li>JOB:{{i.jid.exp}}</li>
+                    <li>JOB:{{i.jid.sal}}</li>
+                </ul>
+
+                <p><a href="{% url 'home_page' %}" class="btn btn-primary">Back to Home</a></p>
+                
+                {% elif i.status == 2 %}
+                <b><h2 class="section-title text-left mb-4" style="color:red;">YOU ARE REJECTED!!...</h2></b>
+                <p>Sorry You are Rejected... pls wait for next opportunity.. Wish You all the very best..</p>
+
+                <p class="mb-4">Check Your Status Below!!</p>
+
+                <ul class="list-unstyled">
+                    <li>NAME:{{i.uid.username}}</li>
+                    <li>JOB:{{i.jid.name}}</li>
+                    <li>LOCATION:{{i.jid.location}}</li>
+                    <li>SKILLS:{{i.jid.skills}}</li>
+                    <li>EXPERIENCE:{{i.jid.exp}}</li>
+                    <li>SALARY:{{i.jid.sal}}</li>
+                </ul>
+
+                <p><a href="{% url 'home_page' %}" class="btn btn-primary">Back to Home</a></p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</center>
+
+{% endblock %}

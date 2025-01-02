@@ -1,0 +1,33 @@
+{% extends 'empindex.html' %}
+{% block content %}
+<form action="{% url 'empregdata' %}" class="mb-4" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <input type="text" class="w-100 form-control border-0 py-3" name="name" placeholder="Your Name">
+        </div>
+        <div class="col-lg-6">
+            <input type="password" class="w-100 form-control border-0 py-3" name="pass" placeholder="Enter Your Password">
+        </div>
+        <div class="col-lg-6">
+            <input type="email" class="w-100 form-control border-0 py-3" name="email" placeholder="Enter Your Email">
+        </div>
+        <div class="col-lg-6">
+            <input type="text" class="w-100 form-control border-0 py-3" name="phone" placeholder="Enter Your Phone">
+        </div>
+        <div class="col-lg-6">
+            <input type="text" class="w-100 form-control border-0 py-3" name="design" placeholder="Your Designation">
+        </div>
+        <div class="col-lg-6">
+            <textarea class="w-100 form-control border-1" name="qual" rows="6" cols="10" placeholder="Your Qualification"></textarea>
+        </div>
+        <div class="col-lg-6">
+            <label for="">Upload Your Image</label>
+            <input type="file" name="image">
+        </div>
+        <div class="col-12">
+            <button class="w-100 btn btn-primary form-control py-2" type="submit">REGISTER</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
