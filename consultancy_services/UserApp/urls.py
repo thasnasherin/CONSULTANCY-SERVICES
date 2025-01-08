@@ -23,6 +23,7 @@ urlpatterns = [
     path('bookingdata/<int:id>',views.bookingdata,name="bookingdata"),
     path('empbookingdata/<int:id>',views.empbookingdata,name="empbookingdata"),
     path('status',views.status,name="status"),
+    path('emphistory',views.emphistory,name="emphistory"),
 
 
 ]

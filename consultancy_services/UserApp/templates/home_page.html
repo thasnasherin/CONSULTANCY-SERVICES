@@ -39,6 +39,10 @@
 	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
 	<link rel="stylesheet" href="{% static 'css/aos.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+
 
 	<title>Welcome to the Home</title>
 </head>
@@ -61,15 +65,19 @@
 				<a href="index.html" class="logo m-0"><span class="text-primary"></span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+					{% if 'u_id' in request.session %}
 					<li class="active"><a href="{% url 'home_page' %}">Home</a></li>
 					<li><a href="{% url 'employees' %}">Employees</a></li>
 					<li><a href="{% url 'jobs' %}">Jobs</a></li>
 					<li><a href="{% url 'about' %}">About</a></li>
 					<li><a href="{% url 'contact' %}">Contact Us</a></li>
-					{% if 'u_id' in request.session %}
+					
 					<li class=""><a href="">Welcome {{request.session.username_u}}</a></li>
 					<li class=""><a href="{% url 'userlogout' %}">Logout</a></li>
 					{% else %}
+					<li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+					<li><a href="{% url 'about' %}">About</a></li>
+					<li><a href="{% url 'contact' %}">Contact Us</a></li>
 					<li class=""><a href="">Login</a></li>
 					<li class=""><a href="">Register</a></li>
 					{% endif %}
@@ -89,44 +97,9 @@
 			<div class="row align-items-center">
 				<div class="col-lg-7">
 						<div class="intro-wrap">
-						<h1 class="mb-5"><span class="d-block">Let's Enjoy Your</span> Path In <span class="typed-words"></span></h1>
-
-						<div class="row">
-							<div class="col-12">
-								<form class="form">
-									<div class="row mb-2">
-										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select name="" id="" class="form-control custom-select">
-												<option value="">Categories</option>
-												<option value="">Occupation</option>
-												<option value="">Education</option>
-												<option value="">Travel</option>
-												<option value="">Medicine</option>
-											</select>
-										</div>
-										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
-											<input type="text" class="form-control" name="daterange">
-										</div>
-										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
-											<input type="text" class="form-control" placeholder="My Expert">
-										</div>
-
-									</div>    
-									<div class="row align-items-center">
-										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<input type="submit" class="btn btn-primary btn-block" value="Apply">
-										</div>
-										<div class="col-lg-8">
-											<label class="control control--checkbox mt-3">
-												<span class="caption">Save this apply</span>
-												<input type="checkbox" checked="checked" />
-												<div class="control__indicator"></div>
-											</label>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+						<h1 class="mb-5"><span class="d-block">Let's Findout Your</span> Career... <span class="typed-words"></span></h1>
+                        <P style="color:#004d6b;font-size: 15px;">Welcome to <i>CORONA</i>, the ultimate platform for connecting job <br> seekers with their  dream  careers! Whether you're a fresh <br> graduate, an experienced professional, <br> or someone   looking to make a career switch, our app is designed <br> to simplify your job search journey and open doors to countless opportunities.</P>
+						
 					</div>
 				</div>
 				<div class="col-lg-5">
@@ -161,16 +134,16 @@
 					<div class="feature-1 d-md-flex zoom">
 						<div class="align-self-center">
 							<span class="flaticon-house display-4 text-primary"></span>
-							<h3>Beautiful Condo</h3>
-							<p class="mb-0">Even the all-powerful Pointing has no control about the blind texts.</p>
+							<h3>Beautiful Companies</h3>
+							<p class="mb-0">Even the all-powerful Pointing has no control to choose the companys.</p>
 						</div>
 					</div>
 
 					<div class="feature-1 zoom">
 						<div class="align-self-center">
-							<span class="flaticon-restaurant display-4 text-primary"></span>
-							<h3>Restaurants & Cafe</h3>
-							<p class="mb-0">Even the all-powerful Pointing has no control about the blind texts.</p>
+							<span class="fas fa-user-tie display-4 text-primary"></span><br><br>
+							<h3>Scoped Designations</h3>
+							<p class="mb-0">Even the all-powerful Pointing has no control to choose the field.</p>
 						</div>
 					</div>
 
@@ -182,7 +155,7 @@
 						<div class="align-self-center">
 							<span class="flaticon-mail display-4 text-primary"></span>
 							<h3>Easy to Connect</h3>
-							<p class="mb-0">Even the all-powerful Pointing has no control about the blind texts.</p>
+							<p class="mb-0">Even the all-powerful Pointing has no control to connect via mails.</p>
 						</div>
 					</div>
 
@@ -190,7 +163,7 @@
 						<div class="align-self-center">
 							<span class="flaticon-phone-call display-4 text-primary"></span>
 							<h3>24/7 Support</h3>
-							<p class="mb-0">Even the all-powerful Pointing has no control about the blind texts.</p>
+							<p class="mb-0">Even the all-powerful Pointing has no control to Support management system.</p>
 						</div>
 					</div>
 
@@ -206,33 +179,33 @@
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
 					<div class="counter-wrap">
 						<div class="counter">
-							<span class="" data-number="9313">0</span>
+							<span class="" data-number="{{job}}">0</span>
 						</div>
-						<span class="caption">No. of Experts</span>
+						<span class="caption">No. of Jobs</span>
 					</div>
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
 					<div class="counter-wrap">
 						<div class="counter">
-							<span class="" data-number="8492">0</span>
+							<span class="" data-number="{{emp}}">0</span>
 						</div>
-						<span class="caption">No. of Clients</span>
+						<span class="caption">No. of Refferal Employees</span>
 					</div>
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
 					<div class="counter-wrap">
 						<div class="counter">
-							<span class="" data-number="100">0</span>
+							<span class="" data-number="{{book}}">0</span>
 						</div>
-						<span class="caption">No. of Categories</span>
+						<span class="caption">No. of Applyings</span>
 					</div>
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
 					<div class="counter-wrap">
 						<div class="counter">
-							<span class="" data-number="120">0</span>
+							<span class="" data-number="{{reg}}">0</span>
 						</div>
-						<span class="caption">No. of Services</span>
+						<span class="caption">No. of Registered Users</span>
 					</div>
 				</div>
 			</div>
@@ -252,7 +225,7 @@
 				<div class="item">
 					<a class="media-thumb" href="{% static 'images/hero-slider-1.jpg' %}" data-fancybox="gallery">
 						<div class="media-text">
-							<a href="{% url 'single' i.id %}"><img src="{{i.image.url}}" alt="Image" class="img-fluid"></a>
+							<a href="{% url 'single' i.id %}"><img src="{{i.image.url}}" style="height: 400px;" alt="Image" class="img-fluid"></a>
 							<h3>{{i.name}}</h3>
 							<span class="location">{{i.location}}</span>
 						</div>
@@ -267,49 +240,7 @@
 	</div>
 
 
-	<div class="untree_co-section testimonial-section mt-5">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-7 text-center">
-					<h2 class="section-title text-center mb-5">Testimonials</h2>
-
-					<div class="owl-single owl-carousel no-nav">
-						<div class="testimonial mx-auto">
-							<figure class="img-wrap">
-								<img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid">
-							</figure>
-							<h3 class="name">Adam Aderson</h3>
-							<blockquote>
-								<p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-							</blockquote>
-						</div>
-
-						<div class="testimonial mx-auto">
-							<figure class="img-wrap">
-								<img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid">
-							</figure>
-							<h3 class="name">Lukas Devlin</h3>
-							<blockquote>
-								<p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-							</blockquote>
-						</div>
-
-						<div class="testimonial mx-auto">
-							<figure class="img-wrap">
-								<img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid">
-							</figure>
-							<h3 class="name">Kayla Bryant</h3>
-							<blockquote>
-								<p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-							</blockquote>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 
 	<div class="untree_co-section">
@@ -325,7 +256,7 @@
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
 					<div class="media-1">
 						{% if i.img %}
-						<a href="#" class="d-block mb-3"><img src="{{i.img.url}}" alt="Image" class="img-fluid"></a>
+						<a href="#" class="d-block mb-3"><img style="height: 400px;" src="{{i.img.url}}" alt="Image" class="img-fluid"></a>
 						{% endif %}
 						<span class="d-flex align-items-center loc mb-2">
 							<span class=""></span>
@@ -348,38 +279,7 @@
 		</div>
 	</div>
 
-	<div class="untree_co-section">
-		<div class="container">
-			<div class="row justify-content-between align-items-center">
-				
-				
-
-				<div class="col-lg-5">
-					<h2 class="section-title text-left mb-4">Take a look at Guidance Video</h2>
-					<p>This Video contains lots of informations about the Members who guide our clients, Their way of teaching and the way of language, Which all represent the methods of Guidance</p>
-
-					<p class="mb-4">Our top experts which have chosen by our clients are explaining about the Consultancy Services which we provide</p>
-
-					<ul class="list-unstyled two-col clearfix">
-						<li>2019-2024</li>
-						<li>Experts</li>
-						<li>certified by legal authorities</li>
-						<li>24/7</li>
-						<li>Required by our clients</li>
-						<li>Easy Guidance</li>
-						<li>Membership</li>
-						<li>Most viewed site in 2020</li>
-						<li>Trustable</li>
-						<li>conventional payment method</li>
-					</ul>
-
-					<p><a href="#" class="btn btn-primary">Get Started</a></p>
-
-					
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	
 	
@@ -389,7 +289,7 @@
 				<div class="col-md-12">
 					<h2 class="mb-2 text-white">Lets you Explore the Best. Contact Us Now</h2>
 					<p class="mb-4 lead text-white text-white-opacity">Touch with our Experts before you get into the real course.</p>
-					<p class="mb-0"><a href="booking.html" class="btn btn-outline-white text-white btn-md font-weight-bold">Get in touch</a></p>
+					<p class="mb-0"><a href="{% url 'contact' %}" class="btn btn-outline-white text-white btn-md font-weight-bold">Get in touch</a></p>
 				</div>
 			</div>
 		</div>
@@ -421,7 +321,7 @@
 						<div class="widget">
 							<h3 class="heading">Pages</h3>
 							<ul class="links list-unstyled">
-								<li><a href="#">Blog</a></li>
+								<li><a href="#">Home</a></li>
 								<li><a href="#">About</a></li>
 								<li><a href="#">Contact</a></li>
 							</ul>
@@ -431,9 +331,9 @@
 						<div class="widget">
 							<h3 class="heading">Resources</h3>
 							<ul class="links list-unstyled">
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">About</a></li>
-								<li><a href="#">Contact</a></li>
+								<li><a href="#">Refferal Employees</a></li>
+								<li><a href="#">Jobs</a></li>
+								<li><a href="#">Apply Now</a></li>
 							</ul>
 						</div>
 					</div>
@@ -441,9 +341,10 @@
 						<div class="widget">
 							<h3 class="heading">Contact</h3>
 							<ul class="list-unstyled quick-info links">
-								<li class="email"><a href="#">mail@example.com</a></li>
-								<li class="phone"><a href="#">+1 222 212 3819</a></li>
-								<li class="address"><a href="#">43 Raymouth Rd. Baltemoer, London 3910</a></li>
+								<li class="name"><a href="#"></a></li>
+								<li class="email"><a href="mailto:thasnasherin@gmail.com">thasnasherin@gmail.com</a></li>
+								<li class="phone"><a href="#">9544398326</a></li>
+								<li class="address"><a href="#">Kochi, Kerala</a></li>
 							</ul>
 						</div>
 					</div>
@@ -466,33 +367,7 @@
 	<script src="{% static 'js/daterangepicker.js' %}"></script>
 
 	<script src="{% static 'js/typed.js' %}"></script>
-	<script>
-		$(function() {
-			var slides = $('.slides'),
-			images = slides.find('img');
-
-			images.each(function(i) {
-				$(this).attr('data-id', i + 1);
-			})
-
-			var typed = new Typed('.typed-words', {
-				strings: ["Occupation.","Education.","Travel.", "Medicine."],
-				typeSpeed: 80,
-				backSpeed: 80,
-				backDelay: 4000,
-				startDelay: 1000,
-				loop: true,
-				showCursor: true,
-				preStringTyped: (arrayPos, self) => {
-					arrayPos++;
-					console.log(arrayPos);
-					$('.slides img').removeClass('active');
-					$('.slides img[data-id="'+arrayPos+'"]').addClass('active');
-				}
-
-			});
-		})
-	</script>
+	
 
 	<script src="{% static 'js/custom.js' %}"></script>
 

@@ -5,7 +5,11 @@ from django.utils.datastructures import MultiValueDictKeyError
 from UserApp.models import *
 # Create your views here.
 def admin_ui(request):
-    return render(request,'admin_ui.html')
+    job=Job.objects.all().count()
+    emp=Eregister.objects.filter(status=1).count()
+    reg=Register.objects.all().count()
+    appl=Booking.objects.all().count()
+    return render(request,'admin_ui.html',{'job':job, 'emp':emp, 'reg':reg, 'appl':appl})
 
 def add_jobs(request):
     return render(request,'add_jobs.html')
@@ -64,11 +68,11 @@ def viewjobrequests(request):
 
 def approve(request,id):
     Booking.objects.filter(id=id).update(status=1)
-    return redirect('approvedrequests')
+    return redirect('viewjobrequests')
 
 def declain(request,id):
     Booking.objects.filter(id=id).update(status=2)
-    return redirect('declainrequests')
+    return redirect('viewjobrequests')
 
 def approvedrequests(request):
     data=Booking.objects.filter(status=1)
@@ -84,11 +88,11 @@ def emprequests(request):
 
 def approve1(request,id):
     Eregister.objects.filter(id=id).update(status=1)
-    return redirect('approvedemp')
+    return redirect('emprequests')
 
 def declain1(request,id):
     Eregister.objects.filter(id=id).update(status=2)
-    return redirect('declainedemp')
+    return redirect('emprequests')
 
 def approvedemp(request):
     data=Eregister.objects.filter(status=1)

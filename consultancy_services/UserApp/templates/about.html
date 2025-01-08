@@ -1,78 +1,7 @@
 
-<!-- /*
-* Template Name: Tour
-* Template Author: Untree.co
-* Tempalte URI: https://untree.co/
-* License: https://creativecommons.org/licenses/by/3.0/
-*/ -->
+{% extends 'home_page.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="favicon.png">
-
-  <meta name="description" content="" />
-  <meta name="keywords" content="bootstrap, bootstrap4" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
-  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
-  <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
-  <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
-  <link rel="stylesheet" href="{% static 'css/aos.css' %}">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-  <title>About Us</title>
-</head>
-
-<body>
-
-
-  <div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-      <div class="site-mobile-menu-close">
-        <span class="icofont-close js-menu-toggle"></span>
-      </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-  </div>
-
-  <nav class="site-nav">
-    <div class="container">
-      <div class="site-navigation">
-        <a href="index.html" class="logo m-0"><span class="text-primary"></span></a>
-
-        <ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-          <li><a href="{% url 'home_page' %}">Home</a></li>
-          <li><a href="{% url 'employees' %}">Employees</a></li>
-					<li><a href="{% url 'jobs' %}">Jobs</a></li>
-          <li class="active"><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'contact' %}">Contact Us</a></li>
-          {% if 'u_id' in request.session %}
-					<li class=""><a href="">Welcome {{request.session.username_u}}</a></li>
-					<li class=""><a href="{% url 'userlogout' %}">Logout</a></li>
-					{% else %}
-					<li class=""><a href="">Login</a></li>
-					<li class=""><a href="">Register</a></li>
-					{% endif %}
-        </ul>
-
-        <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
-          <span></span>
-        </a>
-
-      </div>
-    </div>
-  </nav>
+{% block content %}
 
 
   <div class="hero hero-inner">
@@ -127,232 +56,27 @@
       <div class="row justify-content-center mb-5">
         <div class="col-md-6 text-center">
           <h2 class="section-title mb-3 text-center">Top Experts</h2>
-          <p>The most rated experts by thier clients, With respect of their education</p>
+          <p>The most rated experts by thier clients, With respect of their Designation</p>
         </div>
       </div>
 
       <div class="row">
+        {% for i in data %}
         <div class="col-lg-3 mb-4">
           <div class="team">
-            <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid mb-4 rounded-20">
+            <a href="{% url 'singleemp' id=i.id %}"><img src="{{i.img.url}}" style="height: 500px;width: 300px; alt="Image" class="img-fluid mb-4 rounded-20"></a>
             <div class="px-3">
-              <h3 class="mb-0">James Watson</h3>
-              <p>Executive director</p>
+              <h3 class="mb-0">{{i.name}}</h3>
+              <p>{{i.design}}</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Carl Anderson</h3>
-              <p>Chief informative officer</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Michelle Allison</h3>
-              <p>Chief operating officer</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Drew Wood</h3>
-              <p>Co-Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
+       
 
       </div>
 
     </div>
   </div>
 
-
-  
-
-  <div class="untree_co-section testimonial-section mt-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-7 text-center">
-          <h2 class="section-title text-center mb-5">Testimonials</h2>
-
-          <div class="owl-single owl-carousel no-nav">
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Adam Aderson</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Lukas Devlin</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Kayla Bryant</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="untree_co-section">
-    <div class="container">
-      <div class="row justify-content-between align-items-center">
-
-        <div class="col-lg-6">
-          <figure class="img-play-video">
-            <a id="play-video" class="video-play-button" href="https://www.youtube.com/watch?v=mwtbEGNABWU" data-fancybox>
-              <span></span>
-            </a>
-            <img src="{% static 'images/about_video.jpg' %}" alt="Image" class="img-fluid rounded-20">
-          </figure>
-        </div>
-
-        <div class="col-lg-5">
-          <h2 class="section-title text-left mb-4">Take a look at Guidance Video</h2>
-          <p>This Video contains lots of informations about the Members who guide our clients, Their way of teaching and the way of language, Which all represent the methods of Guidance</p>
-
-          <p class="mb-4">Our top experts which have chosen by our clients are explaining about the Consultancy Services which we provide</p>
-
-          <ul class="list-unstyled two-col clearfix">
-            <li>2019-2024</li>
-            <li>Experts</li>
-            <li>certified by legal authorities</li>
-            <li>24/7</li>
-            <li>Required by our clients</li>
-            <li>Easy Guidance</li>
-            <li>Membership</li>
-            <li>Most viewed site in 2020</li>
-            <li>Trustable</li>
-            <li>conventional payment method</li>
-          </ul>
-
-          <p><a href="#" class="btn btn-primary">Get Started</a></p>
-
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="py-5 cta-section">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h2 class="mb-2 text-white">Lets you Explore the Best. Contact Us Now</h2>
-          <p class="mb-4 lead text-white text-white-opacity">Touch with our Experts before you get into the real course.</p>
-          <p class="mb-0"><a href="booking.html" class="btn btn-outline-white text-white btn-md font-weight-bold">Get in touch</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="site-footer">
-    <div class="inner first">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <div class="widget">
-              <h3 class="heading">About Members</h3>
-              <p>Elite members with high level of qualifications, We entrust you to the experts</p>
-            </div>
-            <div class="widget">
-              <ul class="list-unstyled social">
-                <li><a href="#"><span class="icon-twitter"></span></a></li>
-                <li><a href="#"><span class="icon-instagram"></span></a></li>
-                <li><a href="#"><span class="icon-facebook"></span></a></li>
-                <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                <li><a href="#"><span class="icon-dribbble"></span></a></li>
-                <li><a href="#"><span class="icon-pinterest"></span></a></li>
-                <li><a href="#"><span class="icon-apple"></span></a></li>
-                <li><a href="#"><span class="icon-google"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-2 pl-lg-5">
-            <div class="widget">
-              <h3 class="heading">Pages</h3>
-              <ul class="links list-unstyled">
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-2">
-            <div class="widget">
-              <h3 class="heading">Resources</h3>
-              <ul class="links list-unstyled">
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="widget">
-              <h3 class="heading">Contact</h3>
-              <ul class="list-unstyled quick-info links">
-                <li class="email"><a href="#">mail@example.com</a></li>
-                <li class="phone"><a href="#">+1 222 212 3819</a></li>
-                <li class="address"><a href="#">43 Raymouth Rd. Baltemoer, London 3910</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-  <script src="{% static 'js/popper.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
-  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-  <script src="{% static 'js/aos.js' %}"></script>
-  <script src="{% static 'js/moment.min.js' %}"></script>
-  <script src="{% static 'js/daterangepicker.js' %}"></script>
-
-  <script src="{% static 'js/typed.js' %}"></script>
-  
-  <script src="{% static 'js/custom.js' %}"></script>
-
-</body>
-
-</html>
+{% endblock %}

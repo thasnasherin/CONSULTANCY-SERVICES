@@ -7,9 +7,17 @@ from Employee.models import *
 def home_page(request):
     detail=Job.objects.all()
     details=Eregister.objects.all()
+    job=Job.objects.all().count()
+    emp=Eregister.objects.all().count()
+    book=Booking.objects.all().count()
+    reg=Register.objects.all().count()
     context={
         'detail':detail,
-        'details':details
+        'details':details,
+        'job':job,
+        'book':book,
+        'reg':reg,
+        'emp':emp
     }
     return render(request,'home_page.html',context)
 
@@ -29,7 +37,8 @@ def jobs(request):
     return render(request,'jobs.html',context)
 
 def about(request):
-    return render(request,'about.html')
+    data=Eregister.objects.filter(status=1)
+    return render(request,'about.html',{'data':data})
 
 def contact(request):
     return render(request,'contact.html')
@@ -42,18 +51,22 @@ def contact(request):
 #     return render(request,'filter_services.html',context)
 
 def single(request,id):
-    detail=Job.objects.filter(id=id)
-    context={
+    if 'u_id' in request.session:
+       detail=Job.objects.filter(id=id)
+       context={
         'detail':detail
-    }
-    return render(request,'single.html',context)
+       }
+       return render(request,'single.html',context)
+    return render(request,'login.html',{'msg1':"you need to login"})
 
 def singleemp(request,id):
-    detail=Eregister.objects.filter(id=id)
-    context={
+    if 'u_id' in request.session:
+       detail=Eregister.objects.filter(id=id)
+       context={
         'detail':detail
-    }
-    return render(request,'singleemp.html',context)
+       }
+       return render(request,'singleemp.html',context)
+    return render(request,'login.html',{'msg1':"you need to login"})
 
 def contact_data(request):
     if request.method=="POST":
@@ -107,8 +120,11 @@ def userlogout(request):
     return redirect('login')
 
 def booking(request,id):
-    data=Job.objects.filter(id=id)
-    return render(request,'booking.html',{'data':data})
+    if 'u_id' in request.session:
+       data=Job.objects.filter(id=id)
+       return render(request,'booking.html',{'data':data})
+    return render(request,'login.html',{'msg1':"you need to login"})
+
 
 def bookingdata(request,id):
     if request.method == 'POST':
@@ -120,9 +136,12 @@ def bookingdata(request,id):
     return redirect('status')
 
 def empbooking(request,id):
-    data=Eregister.objects.filter(id=id)
-    data1=Job.objects.all()
-    return render(request,'empbooking.html',{'data':data,'data1':data1})
+    if 'u_id' in request.session:
+       data=Eregister.objects.filter(id=id)
+       data1=Job.objects.all()
+       return render(request,'empbooking.html',{'data':data,'data1':data1})
+    return render(request,'login.html',{'msg1':"you need to login"})
+
 
 def empbookingdata(request,id):
     if request.method == 'POST':
@@ -132,12 +151,22 @@ def empbookingdata(request,id):
         cvletter=request.POST['cvletter']
         data=Ebooking(uid=Register.objects.get(id=uid),eid=Eregister.objects.get(id=id),resume=resume,job=job,coverletter=cvletter)
         data.save()
-    return redirect('empbooking',id)
+    return redirect('emphistory')
 
 def status(request):
-    uid=request.session.get('u_id')
-    data=Booking.objects.filter(uid=uid)
-    return render(request,'status.html',{'data':data})
+    if 'u_id' in request.session:   
+       uid=request.session.get('u_id')
+       data=Booking.objects.filter(uid=uid)
+       return render(request,'status.html',{'data':data})
+    return render(request,'login.html',{'msg1':"you need to login"})
+
+def emphistory(request):
+    if 'u_id' in request.session:   
+       uid=request.session.get('u_id')
+       data=Ebooking.objects.filter(uid=uid)
+       return render(request,'emphistory.html',{'data':data})
+    return render(request,'login.html',{'msg1':"you need to login"})
+
 
 
 

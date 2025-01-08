@@ -1,9 +1,18 @@
 from django.shortcuts import render,redirect
 from.models import*
 from UserApp.models import*
+from AdminApp.models import*
+from Employee.models import*
 # Create your views here.
 def empindex(request):
-    return render(request,'empindex.html')
+    eid=request.session.get('e_id')
+    job=Job.objects.all().count()
+    emp=Eregister.objects.filter(status=1).count()
+    reg=Register.objects.all().count
+    clireq=Ebooking.objects.filter(eid=eid).count()
+    data=Job.objects.all()
+
+    return render(request,'empindex.html',{'reg':reg,'clireq':clireq,'job':job,'emp':emp,'data':data})
 
 def emplogin(request):
     return render(request,'emplogin.html')
@@ -54,9 +63,14 @@ def emplogout(request):
     return redirect('empindex')
 
 def clientreq(request):
-    eid=request.session.get('e_id')
-    data=Ebooking.objects.filter(eid=eid)
-    return render(request,'viewclientrequests.html',{'data':data})
+    if 'e_id' in request.session:
+       eid=request.session.get('e_id')
+       data=Ebooking.objects.filter(eid=eid)
+       return render(request,'viewclientrequests.html',{'data':data})
+    return render(request,'emplogin.html',{'msg1':'You need to login first to access this page!'})
 
 def jobdetails(request):
-    return render(request,'jobdetails.html')
+    if 'e_id' in request.session:
+       data=Job.objects.all()
+       return render(request,'jobdetails.html',{'data':data})
+    return render(request,'emplogin.html',{'msg1':'You need to login first to access this page!'})
